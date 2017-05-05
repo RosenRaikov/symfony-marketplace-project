@@ -1,0 +1,7 @@
+{% block body %}
+    {{ form_start(categoryForm,{'action': path('category_add')}) }}
+    {{ form_widget(categoryForm) }}
+    <input type="submit" value="Add">
+    {{ form_end(categoryForm) }}
+{% endblock %}
+

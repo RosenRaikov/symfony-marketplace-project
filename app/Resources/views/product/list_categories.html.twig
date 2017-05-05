@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <form action="{{ path('category_delete', {'id': category.id}) }}">
+                            <button class="btn btn-danger btn-xs" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+    {{ render(controller('MarketplaceBundle:Category:createCategory')) }}
+    </div>
+{% endblock %}
+

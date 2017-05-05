@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+
+    <p>All products {{ pagination.getTotalItemCount }}</p>
+    <p>Max promotion active today: {{ max_promotion }}%</p>
+    <th>{{ knp_pagination_sortable(pagination, 'Id', 'p.id') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'name', 'p.name') }}</th>
+    <th>{{ knp_pagination_sortable(pagination, 'price', 'p.price') }}</th>
+    <table class="table">
+        <tr class="row">
+            <th>Num</th>
+            <th>id</th>
+            <th>Product name</th>
+            <th>Category name</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+        {% for key,product in pagination %}
+            <tr class="row">
+                <td>{{ key+1 }}</td>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>
+                    {%  set product_promotion = calc.calculate(product) %}
+
+                    {% if product_promotion != product.price %}
+                        <del>{{ product.price | number_format(2) }}</del><br />
+                    {% endif %}
+                    {{ product_promotion | number_format(2) }}
+                </td>
+                <td>{{ product.stock.count }}</td>
+            </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="6">
+                {{ knp_pagination_render(pagination) }}
+            </td>
+        </tr>
+
+    </table>
+{% endblock %}
+

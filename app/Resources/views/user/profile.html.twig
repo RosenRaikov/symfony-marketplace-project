@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1>{{ user.username }}'s profile</h1>
+        <p>Wallet: ${{ user.wallet }}</p>
+        <p>Roles: </p>
+        {%  for role in user.roles %}
+            {%  if role == 'ROLE_USER' %}
+                User
+            {% endif %}
+            {%  if role == 'ROLE_EDITOR' %}
+                Editor
+            {% endif %}
+            {%  if role == 'ROLE_ADMIN' %}
+                Admin
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
+

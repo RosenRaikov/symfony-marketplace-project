@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Percentage</th>
+                <th>Starting date</th>
+                <th>End date</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+    {% for promotion in promotions %}
+        <tr>
+            <td>{{ promotion.percent }}</td>
+            <td>{{ promotion.startDate|date("m/d/Y") }}</td>
+            <td>{{ promotion.endDate|date("m/d/Y") }}</td>
+            <td>
+                {% if promotion.category == null %}
+                    All products
+                {% else %}
+                    {{ promotion.category }}
+                {% endif %}
+            </td>
+            <td>
+                <form action="{{ path('promotion_delete', {'id': promotion.id}) }}"><button type="submit" class="btn btn-danger btn-xs">Delete</button></form>
+            </td>
+            <td>
+                <form action="{{ path('promotion_edit', {'id': promotion.id}) }}"><button type="submit" class="btn btn-success btn-xs">Edit</button></form>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <a class="btn btn-success btn-xs" href='{{ path('promotion_add') }}'>Add promotion</a>
+{% endblock %}
+

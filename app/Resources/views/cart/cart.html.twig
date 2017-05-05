@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Cart Value</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{%  set product_promotion = calc.calculate(product) %}
+                        {% if product_promotion != product.price %}
+                            <del>${{ product.price | number_format(2) }}</del><br />
+                        {% endif %}
+                        ${{ product_promotion | number_format(2) }}</td>
+                    <td><a href="{{ path('remove_from_cart', {'id': product.id}) }}">Remove</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Value: {{ value | number_format(2) }}</p>
+{% endblock %}

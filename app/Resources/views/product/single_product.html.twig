@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h2>{{ product.name }}</h2>
+                    </header>
+
+                    <p>
+                        {%  set product_promotion = calc.calculate(product) %}
+                        {% if product_promotion != product.price %}
+                            <del>${{ product.price | number_format(2) }}</del><br />
+                        {% endif %}
+                        ${{ product_promotion | number_format(2) }}
+                    </p>
+                    <p>
+                        {{ product.description }}
+                    </p>
+                    <p>
+                        Category: <a href="{{ path('products_by_category', {'id': product.category.id}) }}">{{ product.category }}</a>
+                    </p>
+                    <p>
+                        Stock: {{ product.stock }}
+                    </p>
+                    {% if app.user %}
+                        <form action="{{ path('cart_add', {'id': product.id}) }}">
+                            <input class="btn btn-success btn-xs" type="submit" value="Add To Cart">
+                        </form>
+                    {% else %}
+                        <form action="{{ path('login') }}">
+                            <input class="btn btn-success btn-xs" type="submit" value="Add To Cart">
+                        </form>
+                    {% endif %}
+                    <footer>
+                        <div class="pull-right">
+                            {% if is_granted('ROLE_EDITOR') %}
+                                <a class="btn btn-success btn-xs" href="{{ path('product_edit', {'id': product.id}) }}">Edit</a>
+                                <a class="btn btn-danger btn-xs" href="{{ path('product_delete', {'id': product.id}) }}">Delete</a>
+                            {% endif %}
+                            <a class="btn btn-default btn-xs" href="{{ path('homepage') }}">back &raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

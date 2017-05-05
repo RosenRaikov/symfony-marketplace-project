@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h3>Edit promotion</h3>
+    <div class="well">
+        <div class="col-md-offset-5">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <input type="submit">
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
