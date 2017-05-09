@@ -16,6 +16,39 @@
                 Admin
             {% endif %}
         {% endfor %}
+        <p>
+            Owned items:
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Owned</th>
+                    <th>Sale</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in user.products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ ownedItems.fetchCount(user, product) }}</td>
+                        <td>
+                            {% if ownedItems.forSale(user, product) %}
+                                Yes
+                                {% else %}
+                                No
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('put_for_sale', {'user': user.id, 'product': product.id}) }}">Put for sale</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            {% for product in user.products   %}
+
+            {% endfor %}
+        </p>
     </div>
 {% endblock %}
 

@@ -20,3 +20,5 @@ services:
     price_calculator:
         class: MarketplaceBundle\Service\PriceCalculator
         arguments: ['@promotion_manager']
+    owned_items:
+        class: MarketplaceBundle\Service\ownedItems

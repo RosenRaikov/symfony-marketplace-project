@@ -184,24 +184,45 @@ class Product
 
     /**
      * @var int
+     *
      * @ORM\Column(name="stock", type="integer")
      */
     private $stock;
 
     /**
+     * Set stock
+     *
+     * @param integer $stock
+     *
+     * @return Product
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
      * @return int
      */
-    public function getStock(): int
+    public function getStock()
     {
         return $this->stock;
     }
 
     /**
-     * @param int $stock
+     * @var User[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MarketplaceBundle\Entity\User", mappedBy="products")
      */
-    public function setStock(int $stock)
+    private $users;
+
+    public function __construct()
     {
-        $this->stock = $stock;
+        $this->users = new ArrayCollection();
     }
 
 }

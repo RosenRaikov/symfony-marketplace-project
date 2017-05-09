@@ -24,4 +24,7 @@
         </tbody>
     </table>
     <p>Value: {{ value | number_format(2) }}</p>
+    <form action="{{ path('buy') }}">
+        <button class="btn btn-success btn-xs">Buy</button>
+    </form>
 {% endblock %}

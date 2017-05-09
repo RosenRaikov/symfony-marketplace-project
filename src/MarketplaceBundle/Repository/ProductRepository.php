@@ -13,4 +13,5 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
     public function findByCategory($id){
         $products = $this->findBy(['category'=>$id]);
     }
+
 }

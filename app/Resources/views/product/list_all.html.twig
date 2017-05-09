@@ -4,6 +4,7 @@
     <div class="container body-content">
         <div class="row">
             {% for product in products %}
+                {% if product.stock > 0 %}
                 <div class="col-md-6">
                     <article>
                         <header>
@@ -25,6 +26,7 @@
                         </footer>
                     </article>
                 </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

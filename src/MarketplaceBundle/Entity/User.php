@@ -136,8 +136,18 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var Product[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="MarketplaceBundle\Entity\Product", inversedBy="users")
+     * @ORM\JoinTable(name="user_products", joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}, inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")})
+     */
+    private $products;
+
+
     public function __construct()
     {
+        $this->products = new ArrayCollection();
         $this->roles = new ArrayCollection();
     }
 
@@ -163,6 +173,26 @@ class User implements UserInterface
             return $role->getName();
         }, $this->roles->toArray());
     }
+
+    /**
+     * @return ArrayCollection|Product[]
+     */
+    public function getProducts()
+    {
+        return array_map(function (Product $product){
+            return $product;
+        }, $this->products->toArray());
+    }
+
+    /**
+     * @param ArrayCollection|Product[] $products
+     */
+    public function setProducts($products)
+    {
+        $this->products[] = $products;
+    }
+
+
 
     /**
      * Returns the salt that was originally used to encode the password.

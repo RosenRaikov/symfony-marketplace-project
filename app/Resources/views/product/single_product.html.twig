@@ -23,7 +23,7 @@
                         Category: <a href="{{ path('products_by_category', {'id': product.category.id}) }}">{{ product.category }}</a>
                     </p>
                     <p>
-                        Stock: {{ product.stock }}
+                        Available: {% if product.stock > 0 %} in stock {% else %} out of stock {% endif %}
                     </p>
                     {% if app.user %}
                         <form action="{{ path('cart_add', {'id': product.id}) }}">
