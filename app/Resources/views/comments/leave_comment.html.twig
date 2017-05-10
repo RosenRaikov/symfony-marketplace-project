@@ -1,0 +1,4 @@
+{{ form_start(reviewForm,{'action': path('leave_comment_process', {'id': product.id})}) }}
+{{ form_widget(reviewForm) }}
+<input type="submit" value="Leave comment!" class="btn btn-success btn-xs"/>
+{{ form_end(reviewForm) }}

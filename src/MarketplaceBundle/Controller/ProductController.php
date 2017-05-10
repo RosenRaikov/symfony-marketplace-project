@@ -3,6 +3,7 @@
 namespace MarketplaceBundle\Controller;
 
 use MarketplaceBundle\Entity\Category;
+use MarketplaceBundle\Entity\Comment;
 use MarketplaceBundle\Entity\Product;
 use MarketplaceBundle\Form\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -67,6 +68,7 @@ class ProductController extends Controller
             $this->redirectToRoute('homepage');
         }
         $calc = $this->get('price_calculator');
+
         return $this->render('product/single_product.html.twig', ['product' => $product, 'calc' => $calc]);
     }
 
@@ -113,6 +115,7 @@ class ProductController extends Controller
     public function deleteProductAction($id, Request $request)
     {
         $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
+        $comments = $this->getDoctrine()->getRepository(Comment::class)->findBy(['product' => $product]);
 
         if ($product === null){
             return $this->redirectToRoute('homepage');
@@ -122,11 +125,15 @@ class ProductController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isValid() && $form->isSubmitted()){
+        if($form->isValid() && $form->isSubmitted())
+        {
             $em = $this->getDoctrine()->getManager();
+            foreach ($comments as $comment){
+                $em->remove($comment);
+                $em->flush();
+            }
             $em->remove($product);
             $em->flush();
-
             return $this->redirectToRoute('homepage');
         }
 

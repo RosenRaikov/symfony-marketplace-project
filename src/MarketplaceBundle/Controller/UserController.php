@@ -45,7 +45,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/profile", name="user_profile")
+     * @Route("/profile", name="user_profile.html.twig")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function userProfile()
@@ -80,6 +80,7 @@ class UserController extends Controller
             'port' => '3306'
         ]);
     }
+
 
 }
 

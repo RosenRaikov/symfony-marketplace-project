@@ -22,7 +22,10 @@
                     <a href="{{ path('homepage') }}" class="navbar-brand">SoftUni Marketplace</a>
                     {% if is_granted('ROLE_EDITOR') %}
                         <a href="{{ path('products_manager') }}" class="navbar-brand">Product manager</a>
-                        <a href="{{ path('promotions') }}" class="navbar-brand">Manage promotions</a>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('admin_all_users') }}" class="navbar-brand">Admin</a>
                     {% endif %}
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -35,7 +38,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
                             <li>
-                                <a href="{{ path('user_profile') }}">
+                                <a href="{{ path('user_profile.html.twig') }}">
                                     My Profile
                                 </a>
                             </li>

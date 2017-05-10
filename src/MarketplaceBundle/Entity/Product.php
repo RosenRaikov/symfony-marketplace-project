@@ -220,10 +220,48 @@ class Product
      */
     private $users;
 
+    /**
+     * @var Comment[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="MarketplaceBundle\Entity\Comment", mappedBy="product")
+     */
+    private $comments;
+
     public function __construct()
     {
+        $this->comments = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
+    /**
+     * @return ArrayCollection|User[]
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param ArrayCollection|User[] $users
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+    }
+
+    /**
+     * @return ArrayCollection|Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection|Comment[] $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
 }
 

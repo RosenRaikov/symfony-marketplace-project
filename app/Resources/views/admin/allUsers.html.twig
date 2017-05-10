@@ -4,9 +4,10 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <td>ID</td>
-            <td>Username</td>
-            <td>Wallet</td>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Wallet</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -15,6 +16,11 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.wallet }}</td>
+                    <td>
+                        <a href="{{ path('admin_user_profile', {'id': user.id}) }}">View</a>
+
+                        <a href="{{ path('amdin_edit_user', {'id': user.id}) }}">Edit</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

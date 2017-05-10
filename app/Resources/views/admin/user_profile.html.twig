@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1>{{ user.username }}'s profile</h1>
+        <p>Wallet: ${{ user.wallet }}</p>
+        <p>Roles: </p>
+        {%  for role in user.roles %}
+            {%  if role == 'ROLE_USER' %}
+                User
+            {% endif %}
+            {%  if role == 'ROLE_EDITOR' %}
+                Editor
+            {% endif %}
+            {%  if role == 'ROLE_ADMIN' %}
+                Admin
+            {% endif %}
+        {% endfor %}
+        <p>
+            Owned items:
+        <table class="table table-bordered table-responsive">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Owned</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in user.products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ ownedItems.fetchCount(user, product) }}</td>
+                    <td>
+                        <a href="{{ path('admin_remove_product', {'user': user.id, 'product': product.id}) }}">Remove</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

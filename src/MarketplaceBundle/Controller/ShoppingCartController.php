@@ -13,28 +13,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use MarketplaceBundle\Entity\User;
 class ShoppingCartController extends Controller
 {
-
-    /**
-     * @Route("/session", name="session")
-     * @return Response
-     */
-    public function sessionTest(Request $request)
-    {
-        $session = $request->getSession();
-        $cart = array('2', '3');
-        $user = $this->getUser()->getUsername();
-        $session->set("$user'sCart", $cart);
-        dump($session->get("$user'sCart"));
-        $session->remove('cart');
-        $cart = $session->get('cart');
-        foreach ($cart as $item){
-            dump($this->getDoctrine()->getRepository(Product::class)->find($item));
-        }
-
-        return new Response();
-    }
-
-
     /**
      * @Route("/addToCart/{id}", name="cart_add")
      *
