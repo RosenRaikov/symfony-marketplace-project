@@ -81,23 +81,7 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/forsale/{user}/{product}", name="put_for_sale")
-     * @param User $user
-     * @param Product $product
-     */
-    public function putForSale($user, $product){
-        $sale = 1;
-        $db = $this->connection();
-        $query = $db->prepare("UPDATE user_products SET for_sale = :sale WHERE user_id = :user AND product_id = :product");
-        $query->bindParam(':user', $user);
-        $query->bindParam(':product', $product);
-        $query->bindParam(':sale', $sale);
-        $query->execute();
-
-        return $this->redirectToRoute('user_profile');
-    }
-
 }
+
 
 
